@@ -63,6 +63,7 @@ redis = "^5.0.0"
 pydantic-settings = "^2.0.3"
 sqlalchemy = "^2.0.27"
 alembic = "^1.13.1"
+asyncpg = "^0.29.0"
 
 [tool.poetry.group.linters.dependencies]
 black = "^23.9.1"

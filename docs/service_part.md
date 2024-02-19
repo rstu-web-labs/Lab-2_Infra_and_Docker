@@ -23,7 +23,7 @@ ________________________________________
 ### [Запуск приложения](#run)
 
 ```shell
-sudo docker-compose --env-file .env -f infrastructure/docker-compose.local.yaml up --build
+docker-compose --env-file .env -f infrastructure/docker-compose.local.yaml up --build
 ```
 
 ________________________________________
@@ -90,7 +90,7 @@ cp .env.example .env
 Для локальной разработки запустите:
 
 ```shell
-sudo docker-compose --env-file .env -f infrastructure/docker-compose.local.yaml up --build
+docker-compose --env-file .env -f infrastructure/docker-compose.local.yaml up --build
 uvicorn app.main:app --reload
 ```
 
