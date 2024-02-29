@@ -77,7 +77,7 @@ ________________________________________
 Скопируйте репозиторий и перейдите в директорию с проектом:
 
 ```shell
-git clone https://github.com/kapkaevandrey/test_task_for_dom_rf.git
+git clone https://github.com/rstu-web-labs/Lab-3_url_shorts.git
 cd test_task_for_dom_rf
 ```
 
