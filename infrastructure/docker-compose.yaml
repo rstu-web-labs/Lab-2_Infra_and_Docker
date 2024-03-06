@@ -1,0 +1,29 @@
+#U+1F921
+version: "3.9"
+
+services:
+  redis:
+    image: redis:latest
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD}"]
+
+  app:
+    image: fuyukaidesu/app:v1.0
+    ports:
+      - 8080:8080
+    command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8080 --workers 4"
+    env_file: ../.env
+
+  postgres:
+    container_name: postgres
+    image: postgres:16.2
+    environment:
+      env_file: ../.env
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+
+  celery:
+    image: infrastructure-celery
+    command: celery -A app.worker.celery worker --loglevel=info
+    env_file: ../.env
