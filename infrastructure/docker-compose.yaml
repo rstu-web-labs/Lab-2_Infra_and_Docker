@@ -9,7 +9,7 @@ services:
 
   app:
     restart: always
-    image: /infrastructure-app 
+    image: ryksovv/infrastructure-app:v1.0 
     command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8080 --workers 4"
     env_file:
       - ../.env
