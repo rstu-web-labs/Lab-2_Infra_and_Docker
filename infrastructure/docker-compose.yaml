@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16.2
+    restart: always
+    env_file:
+      - ../.env
+
+  app:
+    restart: always
+    image: /infrastructure-app 
+    command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8080 --workers 4"
+    env_file:
+      - ../.env
+    ports:
+      - "80:8080"
+
+  celery:
+    restart: always
+    image: infrastructure-celery
+    command: celery -A app.worker.celery worker --loglevel=info
+    env_file:
+      - ../.env
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:latest"
+    restart: always
+    command: redis-server --requirepass ${REDIS_PASSWORD}
