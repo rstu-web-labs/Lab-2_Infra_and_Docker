@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    restart: always
+    env_file: ../.env
+    environment:
+      POSTGRES_PASSWORD: ${DB_POSTGRES_PASSWORD}
+      POSTGRES_USER: ${DB_POSTGRES_USERNAME}
+      POSTGRES_DB: ${DB_POSTGRES_NAME}
+      ENVIRONMENT: ${ENVIRONMENT}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    expose:
+      - ${DB_POSTGRES_HOST}
+
+  redis_db:
+    container_name: redis_db
+    image: redis:latest
+    restart: always
+    env_file: ../.env
+    environment:
+      ENVIRONMENT: PROD
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    volumes:
+      - redis-data:/var/lib/redis/data
+    expose:
+      - ${REDIS_HOST}
+
+  selery:
+    container_name: selery
+    restart: always
+    command: celery -A app.worker.celery worker --loglevel=info
+    env_file: ../.env
+    image: annzzoomm/my_selary_image:latest
+    depends_on:
+      - redis_db
+      - postgres
+      - application
+
+  application:
+    container_name: application
+    restart: always
+    command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8080 --workers 4"
+    image: annzzoomm/my_selary_image:latest
+    ports:
+      - "80:8080"
+    depends_on:
+      - redis_db
+      - postgres
+
+volumes:
+  pg_data:
+  redis-data:
