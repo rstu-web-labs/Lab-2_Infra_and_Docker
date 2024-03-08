@@ -31,4 +31,8 @@ services:
      - REDIS_PASSWORD=${REDIS_PASSWORD}
      - REDIS_PORT=6379
      - REDIS_HOST=redis
-  
+  volumes:
+      - redis-vol:/var/lib/redis-vol
+
+volumes:
+  redis-vol:
