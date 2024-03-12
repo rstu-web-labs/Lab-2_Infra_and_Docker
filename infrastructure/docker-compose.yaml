@@ -16,8 +16,8 @@ services:
   postgres:
     container_name: postgres
     image: postgres:16.2
+    env_file: .env
     environment:
-      env_file: .env
       POSTGRES_DB: ${DB_POSTGRES_DB}
       POSTGRES_USER: ${DB_POSTGRES_USER}
       POSTGRES_PASSWORD: ${DB_POSTGRES_PASSWORD}
