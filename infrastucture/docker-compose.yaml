@@ -1,7 +1,7 @@
 services:
   app:
     container_name: app
-    image: egork8/asb36-kruchinin:infra
+    image: apollinari0/asb36-kolokolova:infra
     depends_on:
       - postgres_db
       - redis_db
@@ -16,7 +16,7 @@ services:
 
   celery:
     container_name: celery
-    image: egork8/asb36-kruchinin:infra
+    image: apollinari0/asb36-kolokolova:infra
     depends_on:
       - redis_db
       - postgres_db
