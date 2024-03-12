@@ -1,0 +1,4 @@
+docker build -t lab2_duno0o -f D:/Lab-2_Infra_and_Docker/infrastructure/Dockerfile D:/Lab-2_Infra_and_Docker
+docker login
+docker build -f D:\Lab-2_Infra_and_Docker\infrastructure\Dockerfile -t duno0o/lab2_duno0o:latest D:\Lab-2_Infra_and_Docker
+docker push duno0o/lab2_duno0o
