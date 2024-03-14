@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   app:
-    image: karr1v/apprediska:latest
+    image: karr1v/apprediska:v1.0
     command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8080 --workers 4"
     env_file:
       - ../.env
@@ -29,7 +29,7 @@ services:
       - redis_data:/data
 
   celery:
-    image: karr1v/apprediska:latest
+    image: karr1v/apprediska:v1.0
     command: celery -A app.worker.celery worker --loglevel=info
     env_file: .env
     depends_on:
