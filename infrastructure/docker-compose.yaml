@@ -24,7 +24,7 @@ services:
   celery:
     container_name: celery
     restart: always
-    image: romanov/lab2:latest
+    image: just2touch/lab2:latest
     env_file: .env
     build:
       context: ..
@@ -39,7 +39,7 @@ services:
 
   app:
     container_name: main-app
-    image: romanov/lab2:latest
+    image: just2touch/lab2:latest
     restart: always
     command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8080 --workers 4"
     ports:
