@@ -47,4 +47,4 @@ services:
     env_file:
       - ../.env
     volumes:
-      - .postgres:/var/lib/postgres/database
+      - ./postgres:/var/lib/postgres/database

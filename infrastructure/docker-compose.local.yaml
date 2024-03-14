@@ -11,7 +11,7 @@ services:
     ports:
       - ${DB_POSTGRES_PORT}:5432
     volumes:
-      - .postgres:/var/lib/postgres/database
+      - ./postgres:/var/lib/postgres/database
     restart: always
 
 
