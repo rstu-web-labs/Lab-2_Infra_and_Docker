@@ -8,6 +8,8 @@ services:
       POSTGRES_DB: ${DB_POSTGRES_NAME}
       POSTGRES_USER: ${DB_POSTGRES_USERNAME}
       POSTGRES_PASSWORD: ${DB_POSTGRES_PASSWORD}
+    volumes:
+      - /path/to/postgres/data:/var/lib/postgresql/data
 
   redis_db:
     container_name: redis
@@ -17,6 +19,8 @@ services:
     env_file: ../.env
     environment:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
+    volumes:
+      - /path/to/redis/data:/data
 
   celery:
     container_name: celery
