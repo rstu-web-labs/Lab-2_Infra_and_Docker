@@ -22,7 +22,7 @@ services:
     build:
       context: ..
       dockerfile: infrastructure/Dockerfile
-    image:
+    image: yegorrr111/lab2:1.0
     restart: always
     command: celery -A app.worker.celery worker --loglevel=info
     depends_on:
@@ -36,7 +36,7 @@ services:
 
   app:
     container_name: backend
-    image: yegorrr111/lab2
+    image: yegorrr111/lab2:1.0
     restart: always
     command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8080 --workers 4"
     env_file:
