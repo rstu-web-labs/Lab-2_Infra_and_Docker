@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+  app:
+    image: chinnov/infra-app:v1.0
+    command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8080 --workers 4"
+    env_file:
+      - ../.env
+    ports:
+      - "80:8080"
+
+  postgres:
+    image: postgres:16.2
+    environment:
+      POSTGRES_DB: "${DB_POSTGRES_NAME}"
+      POSTGRES_USER: "${DB_POSTGRES_USERNAME}"
+      POSTGRES_PASSWORD: "${DB_POSTGRES_PASSWORD}"
+
+  celery:
+    image: chinnov/infra-app:v1.0
+    command: celery -A app.worker.celery worker --loglevel=info
+    env_file:
+      - ../.env
+    depends_on:
+      - redis
+      
+  redis:
+    image: redis:6.0
+    env_file:
+      - ../.env
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_PORT=6379
+      - REDIS_HOST=redis
+     
+  
