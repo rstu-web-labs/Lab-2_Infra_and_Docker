@@ -26,7 +26,7 @@ services:
       - ./redis:/var/lib/redis
 
   celery:
-    image: olgashep/lab2_ola:latest
+    image: olgashep/lab2_ola:2
     restart: always
     command: celery -A app.worker.celery worker --loglevel=info
     depends_on:
@@ -36,7 +36,7 @@ services:
       - .env
   
   app:
-    image: olgashep/lab2_ola:latest
+    image: olgashep/lab2_ola:2
     restart: always
     command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8080 --workers 4"
     env_file:
