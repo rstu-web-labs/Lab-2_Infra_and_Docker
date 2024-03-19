@@ -21,7 +21,7 @@ services:
   celery:
     container_name: celery
     restart: always
-    image: darkord54/laba_2:latest
+    image: darkord54/lab2_darkord54
     command: celery -A app.worker.celery worker --loglevel=info
     depends_on:
       - redis_db
@@ -34,7 +34,7 @@ services:
 
   app:
     container_name: backend
-    image: darkord54/laba_2:latest
+    image: darkord54/lab2_darkord54
     restart: always
     command: >
       sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8080 --workers 4"
