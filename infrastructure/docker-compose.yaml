@@ -19,19 +19,19 @@ services:
     env_file:
       - ../.env
     environment:
-    REDIS_PASSWORD: ${REDIS_PASSWORD}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
 
   celery:
-    image: TsygikaloEkaterina/lab2:latest
+    image: kate539/lab2:1.0
     command: celery -A app.worker.celery worker --loglevel=info
     env_file:
       - ../.env
     environment:
-      - DB_POSTGRES_HOST: db
-      - REDIS_HOST: redis
+      DB_POSTGRES_HOST: db
+      REDIS_HOST: redis
 
   app:
-    image: TsygikaloEkaterina/lab2:latest
+    image: kate539/lab2:1.0
     command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8080 --workers 4"
     env_file:
       - ../.env
@@ -39,5 +39,5 @@ services:
       DB_POSTGRES_HOST: db
       REDIS_HOST: redis
     ports:
-      - "25565:8080"
+      - "80:8080"
 
