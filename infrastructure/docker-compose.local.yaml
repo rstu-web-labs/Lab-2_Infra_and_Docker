@@ -1,11 +1,10 @@
-version: '3.8'
 
 services:
   postgres:
     container_name: postgres
     image: postgres:latest
     ports:
-     - "5432:${DB_POSTGRES_PORT}"
+     - "${DB_POSTGRES_PORT}:5432"
     restart: always
     env_file: ../.env
     environment:
@@ -20,7 +19,7 @@ services:
     container_name: redis_db
     image: redis:latest
     ports:
-      - "${REDIS_PORT}:${REDIS_PORT}"
+      - "${REDIS_PORT}:6379"
     restart: always
     env_file: ../.env
     environment:
