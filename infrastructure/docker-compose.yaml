@@ -34,11 +34,11 @@ services:
 
   app:
     container_name: backend
-    image: cicada0133/appshka:latest
+    image: cicada0133/appshka:v1.0
     restart: always
     command: >
       sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8080 --workers 4"
     ports:
-      - 8002:8080
+      - 80:8080
     env_file:
       - .env
